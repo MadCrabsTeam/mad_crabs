@@ -14,7 +14,7 @@ mod utils;
 
 use utils::IntoState;
 
-const GAME_NAME: &str = "Assult on all fronts";
+const GAME_NAME: &str = "Mind your sides";
 
 fn main() {
     let mut app = App::new();

@@ -108,9 +108,9 @@ fn damage_enemy<S: Side>(
             damage_text_transform.translation.z += 1.0;
 
             let (color, font_size) = if event.was_crit {
-                (Color::ORANGE_RED, 100.0)
+                (Color::ORANGE_RED, 50.0)
             } else {
-                (Color::GRAY, 80.0)
+                (Color::GRAY, 40.0)
             };
 
             commands.spawn((
@@ -134,34 +134,34 @@ fn damage_enemy<S: Side>(
 
 /// Damage wall based on the side
 fn damage_wall<S: Side>(
-    game_assets: Res<GameAssets>,
-    mut commands: Commands,
+    // game_assets: Res<GameAssets>,
+    // mut commands: Commands,
     mut events: EventReader<WallDamageEvent<S>>,
     mut wall: Query<(&Transform, &mut CastleWall<S>)>,
 ) {
-    let (transform, mut wall) = wall.single_mut();
+    let (_, mut wall) = wall.single_mut();
     for event in events.iter() {
         wall.health -= event.damage;
 
-        let mut damage_text_transform = *transform;
-        damage_text_transform.translation.y += 5.0;
-        damage_text_transform.translation.z += 10.0;
+        // let mut damage_text_transform = *transform;
+        // damage_text_transform.translation.y += 5.0;
+        // damage_text_transform.translation.z += 10.0;
 
-        commands.spawn((
-            Text2dBundle {
-                text: Text::from_section(
-                    format!("{}", event.damage),
-                    TextStyle {
-                        font: game_assets.font.clone(),
-                        font_size: 120.0,
-                        color: Color::MIDNIGHT_BLUE,
-                    },
-                ),
-                transform: damage_text_transform,
-                ..default()
-            },
-            DamageTextMarker::default(),
-        ));
+        // commands.spawn((
+        //     Text2dBundle {
+        //         text: Text::from_section(
+        //             format!("{}", event.damage),
+        //             TextStyle {
+        //                 font: game_assets.font.clone(),
+        //                 font_size: 120.0,
+        //                 color: Color::MIDNIGHT_BLUE,
+        //             },
+        //         ),
+        //         transform: damage_text_transform,
+        //         ..default()
+        //     },
+        //     DamageTextMarker::default(),
+        // ));
     }
 }
 
